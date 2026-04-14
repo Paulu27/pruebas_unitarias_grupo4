@@ -13,18 +13,18 @@ namespace Restaurante.Tests
             // Crear el mock
             _calculadoraMock = new Mock<ICalculadoraCuenta>();
             
-            // Configuramos qué debe responder el mock cuando lo llamen
+            // Configuramos qué debe responder el mock usando los tipos de datos directamente en las variables
             _calculadoraMock.Setup(calc => calc.CalcularCostoPlatillos(It.IsAny<int>(), It.IsAny<double>()))
-                .Returns<int, double>((cant, precio) => cant * precio);
+                .Returns((int cant, double precio) => cant * precio);
                 
             _calculadoraMock.Setup(calc => calc.CalcularIGV(It.IsAny<double>()))
-                .Returns<double>(subtotal => subtotal * 0.18);
+                .Returns((double subtotal) => subtotal * 0.18);
                 
             _calculadoraMock.Setup(calc => calc.CalcularPropina(It.IsAny<double>(), It.IsAny<double>()))
-                .Returns<double>((total, porc) => total * (porc / 100));
+                .Returns((double total, double porc) => total * (porc / 100));
 
             _calculadoraMock.Setup(calc => calc.AplicarDescuento(It.IsAny<double>(), It.IsAny<double>()))
-                .Returns<double>((total, desc) => total - desc);
+                .Returns((double total, double desc) => total - desc);
 
             // Inicializamos el gestor inyectando el mock
             _gestorVentas = new GestorVentas(_calculadoraMock.Object);
