@@ -18,7 +18,7 @@ namespace Restaurante.Tests
             _gestorVentas = new GestorVentas(_calculadoraReal);
         }
 
-        // 1. CREAMOS LA FUNCIÓN QUE LEE EL TXT
+        // 1. FUNCIÓN QUE LEE EL TXT
         public static IEnumerable<TestCaseData> CargarDatosDesdeTxt()
         {
             // Buscamos el archivo en la carpeta donde se ejecuta la prueba
@@ -43,7 +43,7 @@ namespace Restaurante.Tests
             }
         }
 
-        // 2. CONECTAMOS LA PRUEBA A LA FUNCIÓN USANDO TestCaseSource
+        // 2. CONECTAR LA PRUEBA A LA FUNCIÓN USANDO TestCaseSource
         [Test, TestCaseSource(nameof(CargarDatosDesdeTxt))]
         public void CalcularTotalMesa_LeyendoDatosTxt_RetornaTotalCorrecto(int cant, double precio, double propina, double totalEsperado)
         {
