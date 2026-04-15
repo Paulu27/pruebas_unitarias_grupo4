@@ -25,4 +25,10 @@
     <ProjectReference Include="..\Restaurante\Restaurante.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="datos_mesas.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

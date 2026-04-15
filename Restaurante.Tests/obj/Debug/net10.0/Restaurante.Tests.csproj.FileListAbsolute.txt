@@ -165,3 +165,4 @@ D:\Users\Sandra\Documents\GitHub\pruebas_unitarias_grupo4\Restaurante.Tests\obj\
 D:\Users\Sandra\Documents\GitHub\pruebas_unitarias_grupo4\Restaurante.Tests\obj\Debug\net10.0\Restaurante.Tests.pdb
 D:\Users\Sandra\Documents\GitHub\pruebas_unitarias_grupo4\Restaurante.Tests\obj\Debug\net10.0\Restaurante.Tests.genruntimeconfig.cache
 D:\Users\Sandra\Documents\GitHub\pruebas_unitarias_grupo4\Restaurante.Tests\obj\Debug\net10.0\ref\Restaurante.Tests.dll
+D:\Users\Sandra\Documents\GitHub\pruebas_unitarias_grupo4\Restaurante.Tests\bin\Debug\net10.0\datos_mesas.txt
