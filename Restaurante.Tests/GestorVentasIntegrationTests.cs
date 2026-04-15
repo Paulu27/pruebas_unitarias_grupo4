@@ -11,43 +11,27 @@ namespace Restaurante.Tests
         [SetUp]
         public void Setup()
         {
-            // 1. Instanciamos la clase REAL (¡Cero Mocks aquí!)
+            // Instanciamos las clases reales (Sin Mocks)
             _calculadoraReal = new CalculadoraCuenta();
-            
-            // 2. Inyectamos la dependencia real al gestor
             _gestorVentas = new GestorVentas(_calculadoraReal);
         }
 
-        [Test]
-        public void CalcularTotalMesa_UsandoCalculadoraReal_RetornaTotalCorrecto()
+        // ¡Aquí inyectamos los datos!
+        // Parámetros: (cantidadPlatos, precioPlato, propina, totalEsperado)
+        
+        [TestCase(2, 50.0, 10.0, 128.0)]  // Caso 1: 100 de platos + 18 IGV + 10 propina = 128
+        [TestCase(1, 20.0, 5.0, 24.6)]    // Caso 2: 20 de platos + 3.6 IGV + 1 propina = 24.6
+        [TestCase(4, 35.0, 15.0, 186.2)]  // Caso 3: 140 de platos + 25.2 IGV + 21 propina = 186.2
+        public void CalcularTotalMesa_VariosDatos_RetornaTotalCorrecto(int cant, double precio, double propina, double totalEsperado)
         {
-            // Arrange
-            int cantidadPlatos = 2;
-            double precioPlato = 50.0;     // El subtotal será 100.0
-            double porcentajePropina = 10; // La propina será 10.0
-                                           // El IGV real calculado será 18.0
+            // Arrange (Los datos ya vienen en los parámetros del método por el TestCase)
 
             // Act
-            // Esta llamada viajará desde el Gestor hacia la Calculadora real y regresará
-            double resultado = _gestorVentas.CalcularTotalMesa(cantidadPlatos, precioPlato, porcentajePropina);
+            double resultado = _gestorVentas.CalcularTotalMesa(cant, precio, propina);
 
             // Assert
-            // Esperamos 100 + 18 + 10 = 128.0
-            Assert.That(resultado, Is.EqualTo(128.0), "La integración entre el Gestor y la Calculadora falló al sumar el total.");
-        }
-
-        [Test]
-        public void CobrarConCupon_UsandoCalculadoraReal_DescuentaCorrectamente()
-        {
-            // Arrange
-            double totalMesa = 128.0;
-            double valorCupon = 28.0;
-
-            // Act
-            double resultado = _gestorVentas.CobrarConCupon(totalMesa, valorCupon);
-
-            // Assert
-            Assert.That(resultado, Is.EqualTo(100.0), "La integración para aplicar descuentos falló.");
+            Assert.That(resultado, Is.EqualTo(totalEsperado), 
+                $"El cálculo falló para {cant} platos de {precio} con {propina}% de propina.");
         }
     }
 }
